@@ -100,8 +100,9 @@ public:
             bResult = py::bool_(result);
         } catch (const py::error_already_set& e) {
             PyGILState_Release(gstate);
-            throw pyMOOSException(
-                  "OnConnect:: caught an exception thrown in python callback");
+            std::string err_msg = "OnConnect:: caught an exception thrown in python callback:\n";
+            err_msg.append(e.what());
+            throw pyMOOSException(err_msg.c_str());
         }
 
         PyGILState_Release(gstate);
@@ -133,8 +134,9 @@ public:
             }
         } catch (const py::error_already_set& e) {
             PyGILState_Release(gstate);
-            throw pyMOOSException(
-                      "OnMail:: caught an exception thrown in python callback");
+            std::string err_msg = "OnMail:: caught an exception thrown in python callback:\n";
+            err_msg.append(e.what());
+            throw pyMOOSException(err_msg.c_str());
         }
 
         PyGILState_Release(gstate);
@@ -165,8 +167,9 @@ public:
             bResult = py::bool_(result);
         } catch (const py::error_already_set& e) {
             PyGILState_Release(gstate);
-            throw pyMOOSException(
-                "ActiveQueue:: caught an exception thrown in python callback");
+            std::string err_msg = "ActiveQueue:: caught an exception thrown in python callback:\n";
+            err_msg.append(e.what());
+            throw pyMOOSException(err_msg.c_str());
         }
 
         PyGILState_Release(gstate);
